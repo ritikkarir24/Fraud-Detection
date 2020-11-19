@@ -20,10 +20,10 @@
 </h3>
 <br />
 <br />
-<h4> <strong>Collaboraters🤝🤝 :<br /></strong> <h4>
-<p> 
- Aashu Prashar [@Aassshhhhuuuuu](https://github.com/Aassshhhhuuuuu)<br />
- Hrithvik Sharma [@hrithvik49](https://github.com/Hrithvik49)<br />
- Ritik Karir [@ritikkarir24](https://github.com/ritikkarir24)<br />
- Tanishqa Rawlani [@Tanishqa Rawlani](https://github.com/tanishqa0112)<br />
-</p> 
+<h4> <strong>Collaboraters🤝🤝 :</strong> <br /><h4>
+ 
+Aashu Prashar [@Aassshhhhuuuuu](https://github.com/Aassshhhhuuuuu)<br />
+Hrithvik Sharma [@hrithvik49](https://github.com/Hrithvik49)<br />
+Ritik Karir [@ritikkarir24](https://github.com/ritikkarir24)<br />
+Tanishqa Rawlani [@Tanishqa Rawlani](https://github.com/tanishqa0112)<br />
+ 
