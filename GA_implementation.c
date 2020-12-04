@@ -38,9 +38,89 @@ typedef struct key_value
     char Class[50];            // and so on for required no. of columns.
 }dict;
 
+
+
+
+/*-------------------------------------------------------------------------------------------------------*/
+/*Roulett wheel implementation*/
+void selection(chromosome * chromosome)
+{
+
+    double totalFitness = 0;
+    double totalProbability = 0;
+    double probability = 0;
+    double rndNumber;
+    double min,max;
+
+    int i;
+
+    min = 0.0;
+    max = 1.0;
+
+    POPOLATION_SIZE = popcurrent[];
+
+    for(i=0; i<POPULATION_SIZE; i++)
+    {
+        totalFitness += chromosome[i].fitness;
+    }
+
+    for(i=0; i<POPULATION_SIZE; i++)
+    {
+        chromosome[i].probability = (chromosome[i].fitness)/totalFitness;
+        printf("Chromosome %d with probability %f\n",i, chromosome[i].probability);
+    }
+
+    srand((unsigned)time(NULL));
+    for(i=0;i<POPULATION_SIZE;i++)
+    {
+        rndNumber = ((double)rand()/(double)RAND_MAX);
+
+        if(chromosome[i].probability >= rndNumber)
+        {
+            printf("Chromosome %d selected \n",i);
+        }
+    }
+}
+
+
+
+
 /*---------------------------------------------------------------------------------------------------------------------*/
 
+struct Individual
+{
+    int fitness;
+    int geneLength;
+    int genes[5];
+};
 
+/* Code for fitness criteria */
+
+struct Individual initialize(Individual* obj)
+{
+    obj->fitness = 0;
+    obj->geneLength = 5;
+    int i;
+    for(i=0; i<obj->geneLength; i++)
+    {
+        obj->genes[i]=rand()%2;
+    }
+}
+void calculateFitness(struct Individual* obj)
+{
+    obj->fitness = 0;
+    int i;
+    for (i = 0; i < obj->geneLength; i++)
+    {
+        if (obj->genes[i] == 1)
+        {
+            ++obj->fitness;
+        }
+    }
+}
+/*----------------------------------------------------------------------------------------------------------*/
+//void initialize(struct Individual* obj);
+//void calculateFitness(struct Individual* obj);
 
 int main()
 {
@@ -59,7 +139,7 @@ int main()
     goto enter;
 
     // Initialize the file pointers
-	FILE *fp = fopen("F:\\College Study Material\\Minor\\Dataset\\Dataset V1-V28\\Trying.csv", "r"); //open in read mode
+	FILE *fp = fopen("C:\\Users\\shiva\\Downloads\\Book1.csv", "r"); //open in read mode
 	if (!fp)
 	{
 		printf("error occured");
@@ -70,9 +150,9 @@ int main()
 	char buff[1024];      								  // stores the first 1024 lines into buff
 	int row_count = 0;
 	int field_count = 0;
-	dict values[999];                                       //array to structs to store values
+	int values[999];                                       //array to structs to store values
 
-	chromosome*chromosome[300];
+	int chromosome[300];
 
 	while(fgets(buff, 1024, fp))
 	{
@@ -87,16 +167,17 @@ int main()
 		{
 		    for (i=0; i<=num; i++)
             {
-                chromosome = value[i].V1;
+                chromosome[i] = values[i];
             }
-
+		}
+	}
 
 	/*Code for fitness*/
 
-    struct Individual obj;
-    initialize(&obj);
-    calculateFitness(&obj);
-    printf("%d",obj.fitness);
+    struct Individual obj1;
+    initialize(&obj1);
+    calculateFitness(&obj1);
+    printf("%d",obj1.fitness);
 
     selection(values);
 
@@ -106,6 +187,11 @@ int main()
 
     char popcurrent[50];         // we make 50 chromes of popcurrent
     char popnext[50];            // we make 50 chromes of popnext
+
+	void *pickchroms(char popcurrent[]);
+    void *crossover(char popnext[]);
+    void *mutation(char popnext[]);
+    void *evpop(char popcurrent[]);
 
     evpop(popcurrent);           //initialise pop current
 
@@ -150,76 +236,7 @@ int main()
 
 /*-------------------------------------------------------------------------------------------------------*/
 
-/* Code for fitness criteria */
-
-struct Individual
-{
-    int fitness;
-    int geneLength;
-    int genes[5];
-};
-void initialize(struct Individual* obj)
-{
-    obj->fitness = 0;
-    obj->geneLength = 5;
-    for(int i=0; i<obj->geneLength; i++)
-    {
-        obj->genes[i]=rand()%2;
-    }
-}
-void calculateFitness(struct Individual* obj)
-{
-    obj->fitness = 0;
-    for (int i = 0; i < obj->geneLength; i++)
-    {
-        if (obj->genes[i] == 0)
-        {
-            ++obj->fitness;
-        }
-    }
-}
-/*----------------------------------------------------------------------------------------------------------*/
 
 
-/*Roulett wheel implementation*/
 
-void selection(chromosome * chromosome)
-{
-
-    double totalFitness = 0;
-    double totalProbability = 0;
-    double probability = 0;
-    double rndNumber;
-    double min,max;
-
-    int i;
-
-    min = 0.0;
-    max = 1.0;
-
-    POPOLATION_SIZE = popcurrent[];
-
-    for(i=0; i<POPULATION_SIZE; i++)
-    {
-        totalFitness += chromosome[i].fitness;
-    }
-
-    for(i=0; i<POPULATION_SIZE; i++)
-    {
-        chromosome[i].probability = (chromosome[i].fitness)/totalFitness;
-        printf("Chromosome %d with probability %f\n",i, chromosome[i].probability);
-    }
-
-    srand((unsigned)time(NULL));
-    for(i=0;i<POPULATION_SIZE;i++)
-    {
-        rndNumber = ((double)rand()/(double)RAND_MAX);
-
-        if(chromosome[i].probability >= rndNumber)
-        {
-            printf("Chromosome %d selected \n",i);
-        }
-    }
-}
-/*-------------------------------------------------------------------------------------------------------*/
 
