@@ -38,37 +38,3 @@ void selection(Chromosome * chromosome)
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Solution for problem:
-
-
-double rndNumber = rand() / (double) RAND_MAX;
-double offset = 0.0;
-int pick = 0;
-
-for (i = 0; i < POPULATION_SIZE; i++) {
-    offset += chromosome[i].probability;
-    if (rndNumber < offset) {
-        pick = i;
-        break;
-    }
-}
-
-printf("Chromosome %d selected.\n", pick);
