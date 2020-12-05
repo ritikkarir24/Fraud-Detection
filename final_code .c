@@ -8,7 +8,7 @@ struct Individual
 {
     int fitness;
     int geneLength;
-    int genes[5];
+    int genes[209];
 };
 
 typedef struct key_value
@@ -58,8 +58,7 @@ int main()
 
     printf("\nWelcome to the Genetic Algorithm coded for Minor 1 \n"); // introduction to the program
 
-
-    enter: printf("\nPlease enter the no. of iterations:  ");
+enter: printf("\nPlease enter a positive number:  ");
     scanf("%d",&num);       // enter the no. of iterations in num
 
 
@@ -67,7 +66,7 @@ int main()
     goto enter;
 
     	// Initialize the file pointers
-	FILE *fp = fopen("E:\\Semester V\\Minor-1\\Fraud_Detection\\Book1.csv", "r"); //open in read mode
+	FILE *fp = fopen("E:\\Study Material\\New folder\\Book1.csv", "r"); //open in read mode
 	if (!fp)
 	{
 		printf("error occured");
@@ -86,7 +85,7 @@ int main()
 		if(row_count == 1)
 		{
 			continue;
-        }														// we did not want to take the labels
+        }												// we did not want to take the labels
 		char *field = strtok(buff, ",");   						// seperate buff with commas
 		while(field)
 		{
@@ -260,35 +259,16 @@ int main()
 
 	int chromosome[300];
 
-	while(fgets(buff, 1024, fp))
-	{
-		field_count = 0;
-		row_count++;
-		if(row_count == 1)
-		{
-			continue;
-        }
-    char *field = strtok(buff, ",");
-    /*while(field)
-		{
-		    for (i=0; i<=num; i++)
-            {
-                chromosome = value[i].V1;
-            }
-		}*/
-	}
-
 	/*Code for fitness*/
 
-    struct Individual obj[210];
+    struct Individual obj[210];                          //for loop used for calculating the fitness of individual object
 	for(int k=0;k<210;k++)
     {
 		initialize(&obj[k]);
     	calculateFitness(&obj[k]);
 	}
-    //printf("%d",obj.fitness);
 
-    selection(&obj);
+    selection(&obj);                                     //function for roulette wheel
 
 
 
@@ -312,10 +292,10 @@ void printValues(dict values[])
 void initialize(struct Individual* obj)
 {
     obj->fitness = 0;
-    obj->geneLength = 5;
+    obj->geneLength = 6;
     for(int i=0; i<obj->geneLength; i++)
     {
-        obj->genes[i]=rand()%2;
+        obj->genes[i]=rand()%2;                         //to pick out random variable in 0 & 1 format
     }
 }
 void calculateFitness(struct Individual* obj)
@@ -323,7 +303,7 @@ void calculateFitness(struct Individual* obj)
     obj->fitness = 0;
     for (int i = 0; i < obj->geneLength; i++)
     {
-        if (obj->genes[i] == 1)
+        if (obj->genes[i] == 0)
         {
             ++obj->fitness;
         }
@@ -347,18 +327,10 @@ void selection(struct Individual *chromosome)
     min = 0.0;
     max = 1.0;
 
-    int POPULATION_SIZE = 210;
+    int POPULATION_SIZE = 209;
 
-	double probability[210];
-	for(int k=0;k<210;k++)
-	{
-
-        int x=rand()%1000;
-        double y=1000.00;
-        probability[k]=x/y;
-	}
-
-    for(i=0; i<POPULATION_SIZE; i++)
+	double probability[209];
+	for(i=0; i<POPULATION_SIZE; i++)
     {
         totalFitness += chromosome[i].fitness;
     }
@@ -368,17 +340,8 @@ void selection(struct Individual *chromosome)
         probability[i] = (chromosome[i].fitness)/totalFitness;
         printf("Chromosome %d with probability %f\n",i, probability[i]);
     }
+            printf("Chromosome %d selected \n",POPULATION_SIZE);
 
-    srand((unsigned)time(NULL));
-    for(i=0;i<POPULATION_SIZE;i++)
-    {
-        rndNumber = ((double)rand()/(double)RAND_MAX);
-
-        if(probability[i] >= rndNumber)
-        {
-            printf("Chromosome %d selected \n",i);
-        }
-    }
 }
 /*-------------------------------------------------------------------------------------------------------*/
 
