@@ -139,7 +139,7 @@ int main()
     goto enter;
 
     // Initialize the file pointers
-	FILE *fp = fopen("C:\\Users\\shiva\\Downloads\\Book1.csv", "r"); //open in read mode
+	FILE *fp = fopen("E:\\Semester V\\Minor-1\\Fraud_Detection\\Book1.csv", "r"); //open in read mode
 	if (!fp)
 	{
 		printf("error occured");
@@ -150,7 +150,7 @@ int main()
 	char buff[1024];      								  // stores the first 1024 lines into buff
 	int row_count = 0;
 	int field_count = 0;
-	int values[999];                                       //array to structs to store values
+	int values[210];                                       //array to structs to store values
 
 	int chromosome[300];
 
