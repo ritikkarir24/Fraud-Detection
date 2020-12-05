@@ -67,7 +67,7 @@ int main()
     goto enter;
 
     	// Initialize the file pointers
-	FILE *fp = fopen("C:\\Users\\Avik\\Desktop\\Book1.csv", "r"); //open in read mode
+	FILE *fp = fopen("E:\\Semester V\\Minor-1\\Fraud_Detection\\Book1.csv", "r"); //open in read mode
 	if (!fp)
 	{
 		printf("error occured");
