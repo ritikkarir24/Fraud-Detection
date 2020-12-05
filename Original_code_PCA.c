@@ -45,7 +45,7 @@ typedef struct key_value
 int main()
 {
 	// Initialize the file pointers
-	FILE *fp = fopen("/home/ritik/Downloads", "r"); //open in read mode
+	FILE *fp = fopen("E:\\Semester V\\Minor-1\\Fraud_Detection\\Book1.csv", "r"); //open in read mode
 	if (!fp)
 	{
 		printf("error occured");
